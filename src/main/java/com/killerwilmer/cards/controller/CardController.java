@@ -22,7 +22,7 @@ public class CardController {
     }
 
     @GetMapping("/cards")
-    List<Card> getAllCards() {
+    public List<Card> getAllCards() {
         return cardRepository.findAll();
     }
 
@@ -34,14 +34,14 @@ public class CardController {
     }
 
     @GetMapping("/cards/{id}")
-    Card getOneCard(@PathVariable String id) {
+    public Card getOneCard(@PathVariable String id) {
 
         return cardRepository.findById(id)
                 .orElseThrow(() -> new CardNotFoundException(id));
     }
 
     @DeleteMapping("/cards/{id}")
-    void deleteCard(@PathVariable String id) {
+    public void deleteCard(@PathVariable String id) {
         Card card = cardRepository.findById(id)
                 .orElseThrow(() -> new CardNotFoundException(id));
 
