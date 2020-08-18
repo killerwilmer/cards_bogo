@@ -2,10 +2,9 @@ package com.killerwilmer.cards.controller;
 
 import com.killerwilmer.cards.model.Card;
 import com.killerwilmer.cards.repository.CardRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -18,7 +17,12 @@ public class CardController {
         this.cardRepository = cardRepository;
     }
 
-    @PostMapping("/card/create")
+    @GetMapping("/cards")
+    List<Card> getAllCards() {
+        return cardRepository.findAll();
+    }
+
+    @PostMapping("/cards")
     public Card createCard(@RequestBody Card pCard) {
 
         Card card = cardRepository.save(new Card(pCard.getName(), pCard.getBody(), pCard.getArea(), pCard.getChannel()));
